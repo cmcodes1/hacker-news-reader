@@ -1,7 +1,8 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, useColorScheme, } from 'react-native';
+import { StatusBar, useColorScheme, } from 'react-native';
 import { Colors, } from 'react-native/Libraries/NewAppScreen';
-import Home from './src/screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import NavigationStack from './src/navigation/NavigationStack';
 
 const App = () => {
 
@@ -12,10 +13,12 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Home />
-    </SafeAreaView>
+      <NavigationContainer>
+        <NavigationStack />
+      </NavigationContainer>
+    </>
   );
 };
 
