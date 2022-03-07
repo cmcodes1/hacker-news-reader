@@ -3,7 +3,7 @@ import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, } from 'rea
 import colors from '../theme/colors';
 import yCombinatorLogo from '../assets/yCombinatorLogo.png';
 import TopStoriesService from '../api/TopStoriesService';
-import Item from '../components/Item';
+import Story from '../components/Story';
 
 export default function Home({ navigation }) {
 
@@ -37,12 +37,13 @@ export default function Home({ navigation }) {
         setIsLoading(false)
     }
 
-    // useEffect(() => {
-    //     console.log('topStories', topStories)
-    // }, [topStories])
+    useEffect(() => {
+        console.log('topStories', topStories)
+    }, [topStories])
 
-    const renderItem = ({ item, index }) => (
-        <Item
+    const renderStory = ({ item, index }) => (
+        <Story
+            navigation={navigation}
             index={index}
             title={item.title}
             url={item.url}
@@ -50,6 +51,7 @@ export default function Home({ navigation }) {
             by={item.by}
             time={item.time}
             descendants={item.descendants}
+            kids={item.kids}
         />
     )
 
@@ -67,7 +69,7 @@ export default function Home({ navigation }) {
                         :
                         <FlatList
                             data={topStories}
-                            renderItem={renderItem}
+                            renderItem={renderStory}
                             keyExtractor={item => item.id}
                         />
                 }

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import dateFromNow from '../helpers/DateFromNow';
 import colors from '../theme/colors';
 
-export default function Item({ index, title, url, score, by, time, descendants, }) {
+export default function Story({ navigation, index, title, url, score, by, time, descendants, kids, }) {
 
     const getHostname = (url) => {
         const matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
@@ -12,12 +12,20 @@ export default function Item({ index, title, url, score, by, time, descendants, 
 
     return (
         <View style={styles.item}>
-            <Text style={styles.heading}>
+            <Text style={styles.row}>
                 <Text style={styles.bigText}>{index + 1}{'. \u25B2 '}</Text>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.bigText}>{` (${getHostname(url)})`}</Text>
             </Text>
-            <Text style={styles.smallText}>{score}{' points by '}{by}{' '}{dateFromNow(time)}{descendants && ` | ${descendants} comments`}</Text>
+            <Text style={styles.row}>
+                <Text style={styles.smallText}>{score}{' points by '}{by}{' '}{dateFromNow(time)}</Text>
+                <Text
+                    style={styles.smallText}
+                    onPress={() => navigation.navigate('Item', { kids: kids })}
+                >
+                    {descendants && ` | ${descendants} comments`}
+                </Text>
+            </Text>
         </View>
     )
 }
@@ -26,7 +34,7 @@ const styles = StyleSheet.create({
     item: {
         margin: 10,
     },
-    heading: {
+    row: {
         flexDirection: 'row',
         flexWrap: 'wrap',
     },

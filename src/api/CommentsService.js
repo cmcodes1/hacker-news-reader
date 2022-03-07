@@ -1,21 +1,22 @@
-class TopStoriesService {
+class CommentsService {
 
-    async getTopStoriesIds() {
+    async getComments(id) {
         try {
-            let response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json', {
+            let response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`, {
                 "method": "GET",
                 "headers": {
                     "Accept": "application/json",
                 },
             });
             response = await response.json();
-            return { "payload": response, "status": "success", };
+            return response;
         } catch (e) {
-            return { "payload": `Something went wrong! Try again later! ${e}`, "status": "error", };
+            let response = `Something went wrong! Try again later! ${e}`;
+            return response;
         }
     }
 
-    async getTopStoriesData(id) {
+    async getFirstReply(id) {
         try {
             let response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`, {
                 "method": "GET",
@@ -32,4 +33,4 @@ class TopStoriesService {
 
 }
 
-export default TopStoriesService;
+export default CommentsService;
