@@ -24,9 +24,10 @@ class TopStoriesService {
                 },
             });
             response = await response.json();
-            return { "payload": response, "status": "success", };
+            return response;
         } catch (e) {
-            return { "payload": `Something went wrong! Try again later! ${e}`, "status": "error", };
+            let response = `Something went wrong! Try again later! ${e}`;
+            return response;
         }
     }
 

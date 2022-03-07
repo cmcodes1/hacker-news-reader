@@ -18,28 +18,40 @@ export default function Home({ navigation }) {
     }, [navigation])
 
     const fetchTopStories = async () => {
+
         setIsLoading(true)
+
         const response = await topStoriesService.getTopStoriesIds()
-        // console.log('response', response)
+
         if (response.status == 'success') {
-            const topStoriesData = []
-            for (let i = 0; i < 10; i++) {
-                const responseData = await topStoriesService.getTopStoriesData(response.payload[i])
-                if (responseData.status == 'success') {
-                    topStoriesData.push(responseData.payload)
-                }
+
+            let promises = []
+
+            let topStoriesData = []
+
+            for (let i = 0; i < 30; i++) {
+                promises.push(topStoriesService.getTopStoriesData(response.payload[i]))
             }
-            // console.log('topStoriesData', topStoriesData)
+
+            topStoriesData = await Promise.all(promises)
+
+            console.log('topStoriesData', topStoriesData)
+
             setTopStories(topStoriesData)
+
         } else {
-            alert(response.payload);
+
+            alert(response.payload)
+
         }
+
         setIsLoading(false)
+
     }
 
-    useEffect(() => {
-        console.log('topStories', topStories)
-    }, [topStories])
+    // useEffect(() => {
+    //     console.log('topStories', topStories)
+    // }, [topStories])
 
     const renderStory = ({ item, index }) => (
         <Story

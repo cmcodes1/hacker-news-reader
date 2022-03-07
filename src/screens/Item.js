@@ -21,8 +21,6 @@ export default function Item({ navigation, route }) {
 
         setIsLoading(true)
 
-        console.log('route.params.kids', route.params.kids)
-
         let promises = []
 
         let commentsData = []
@@ -33,16 +31,15 @@ export default function Item({ navigation, route }) {
 
         commentsData = await Promise.all(promises)
 
-        console.log('commentsData', commentsData)
-
         setComments(commentsData)
 
         setIsLoading(false)
+
     }
 
-    useEffect(() => {
-        console.log('comments', comments)
-    }, [comments])
+    // useEffect(() => {
+    //     console.log('comments', comments)
+    // }, [comments])
 
     const renderComment = ({ item }) => (
         <Comment
