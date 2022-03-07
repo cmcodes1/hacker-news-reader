@@ -15,7 +15,7 @@ export default function Story({ navigation, index, title, url, score, by, time, 
             <Text style={styles.row}>
                 <Text style={styles.bigText}>{index + 1}{'. \u25B2 '}</Text>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.bigText}>{` (${getHostname(url)})`}</Text>
+                <Text style={styles.bigText}>{url && ` (${getHostname(url)})`}</Text>
             </Text>
             <Text style={styles.row}>
                 <Text style={styles.smallText}>{score}{' points by '}{by}{' '}{dateFromNow(time)}</Text>
