@@ -1,5 +1,5 @@
-import React, { useEffect, useState, } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, } from 'react-native';
+import React, { useEffect, useState, useCallback, } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, RefreshControl, ToastAndroid, } from 'react-native';
 import colors from '../theme/colors';
 import yCombinatorLogo from '../assets/yCombinatorLogo.png';
 import TopStoriesService from '../api/TopStoriesService';
@@ -67,6 +67,15 @@ export default function Home({ navigation }) {
         />
     )
 
+    const [refreshing, setRefreshing] = useState(false)
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true)
+        fetchTopStories()
+        ToastAndroid.show('Stories refreshed', ToastAndroid.SHORT)
+        setRefreshing(false)
+    }, [refreshing])
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -83,6 +92,13 @@ export default function Home({ navigation }) {
                             data={topStories}
                             renderItem={renderStory}
                             keyExtractor={item => item.id}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={refreshing}
+                                    onRefresh={onRefresh}
+                                    colors={[colors.primary]}
+                                />
+                            }
                         />
                 }
             </View>
