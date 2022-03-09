@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<View
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+        }
+      }
+    >
+      NaN
+      . ▲ 
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 14,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 14,
+        }
+      }
+    />
+  </Text>
+  <Text
+    style={
+      Object {
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 11,
+        }
+      }
+    >
+       points by 
+       
+      on undefined at 12:NaN am
+    </Text>
+    <Text
+      onPress={[Function]}
+      style={
+        Object {
+          "fontSize": 11,
+        }
+      }
+    />
+  </Text>
+</View>
+`;

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<View
+  style={
+    Object {
+      "margin": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontSize": 11,
+      }
+    }
+  >
+    ▲ 
+     
+    on undefined at 12:NaN am
+  </Text>
+  <View
+    style={
+      Array [
+        Object {},
+        undefined,
+        undefined,
+      ]
+    }
+    testID="html"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+          undefined,
+          undefined,
+        ]
+      }
+      testID="body"
+    >
+      <Text
+        allowFontScaling={true}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "fontSize": 14,
+            },
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        undefined
+      </Text>
+    </View>
+  </View>
+</View>
+`;
