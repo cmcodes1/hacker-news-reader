@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, RefreshControl, ToastAndroid, } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, RefreshControl, ToastAndroid, Platform, StatusBar, } from 'react-native';
 import colors from '../theme/colors';
 import yCombinatorLogo from '../assets/yCombinatorLogo.png';
 import TopStoriesService from '../api/TopStoriesService';
@@ -110,8 +110,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondary,
     },
     header: {
+        marginTop: Platform.OS == 'ios' ? 40 : StatusBar.height,
         backgroundColor: colors.primary,
-        height: 50,
+        height: 'auto',
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -132,5 +134,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingBottom: Platform.OS == "ios" ? 20 : 0,
     },
 })

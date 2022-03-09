@@ -1,5 +1,5 @@
-import React, { useState, useEffect, } from 'react'
-import { View, Text, StyleSheet, Image, ActivityIndicator, FlatList, } from 'react-native'
+import React, { useState, useEffect, useRef, } from 'react'
+import { View, Text, StyleSheet, Image, ActivityIndicator, FlatList, Platform, StatusBar, } from 'react-native'
 import CommentsService from '../api/CommentsService'
 import yCombinatorLogo from '../assets/yCombinatorLogo.png'
 import Comment from '../components/Comment'
@@ -12,6 +12,8 @@ export default function Item({ navigation, route }) {
     const [isLoading, setIsLoading] = useState(false)
 
     const [comments, setComments] = useState([])
+
+    const componentMounted = useRef(true)
 
     useEffect(() => {
         fetchComments()
@@ -31,9 +33,15 @@ export default function Item({ navigation, route }) {
 
         commentsData = await Promise.all(promises)
 
-        setComments(commentsData)
+        if (componentMounted.current) {
+            setComments(commentsData)
+        }
 
         setIsLoading(false)
+
+        return () => {
+            componentMounted.current = false
+        }
 
     }
 
@@ -54,8 +62,13 @@ export default function Item({ navigation, route }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image style={styles.logo} source={yCombinatorLogo} />
-                <Text style={styles.headerText}>Hacker News</Text>
+                <Text style={styles.backIcon} onPress={() => navigation.goBack()}>{'\u00ab'}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Image style={styles.logo} source={yCombinatorLogo} />
+                    <Text style={styles.headerText}>Hacker News</Text>
+                </View>
+                <View />
+                <View />
             </View>
             <View style={styles.body}>
                 {
@@ -80,11 +93,16 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondary,
     },
     header: {
+        marginTop: Platform.OS == 'ios' ? 40 : StatusBar.height,
         backgroundColor: colors.primary,
-        height: 50,
+        height: 'auto',
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+    },
+    backIcon: {
+        fontSize: 30,
     },
     logo: {
         height: 40,
