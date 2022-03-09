@@ -35,8 +35,6 @@ export default function Home({ navigation }) {
 
             topStoriesData = await Promise.all(promises)
 
-            console.log('topStoriesData', topStoriesData)
-
             setTopStories(topStoriesData)
 
         } else {
